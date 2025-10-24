@@ -93,7 +93,13 @@ jilo-ai-website/
 │   ├── CoreAdvantages.tsx   # 核心优势
 │   ├── CTASection.tsx       # 行动号召区域
 │   ├── WeChatQRModal.tsx    # 微信二维码弹窗
-│   └── Footer.tsx           # 页脚
+│   ├── Footer.tsx           # 页脚
+│   └── mcp/                 # MCP组件目录
+│       ├── IndustryResearchMCP.tsx  # 主MCP组件
+│       ├── IndustryCharts.tsx       # 数据可视化图表
+│       ├── ExportReport.tsx         # 报告导出功能
+│       ├── ReportHistory.tsx        # 历史记录管理
+│       └── RealTimeData.tsx         # 实时数据更新
 ├── public/                  # 静态资源（图片、字体等）
 ├── node_modules/            # 依赖包（自动生成）
 ├── .git/                    # Git版本控制（隐藏文件夹）
@@ -551,6 +557,55 @@ export default function RootLayout({
 </div>
 ```
 
+### 场景10: 自定义MCP组件
+
+#### 添加新的行业类型
+**文件**: `components/mcp/IndustryResearchMCP.tsx`
+
+在 `industryDatabase` 数组中添加新行业:
+
+```typescript
+const industryDatabase: IndustryData[] = [
+  // 现有行业...
+  {
+    name: '新能源汽车',
+    keywords: ['电动车', '新能源汽车', '电池', '充电桩', '特斯拉'],
+    marketData: {
+      size: '全球市场规模约$8000亿美元',
+      growthRate: '年增长率15.2%',
+      keyPlayers: ['特斯拉', '比亚迪', '蔚来', '理想']
+    },
+    regulations: ['碳排放标准', '电池安全认证', '充电标准'],
+    trends: ['自动驾驶', '电池技术', '充电网络', '智能网联']
+  }
+];
+```
+
+#### 修改图表样式
+**文件**: `components/mcp/IndustryCharts.tsx`
+
+```typescript
+// 修改图表颜色
+const COLORS = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7'];
+
+// 修改图表类型
+<BarChart data={data}>
+  <Bar dataKey="value" fill="#FF6B6B" />
+</BarChart>
+```
+
+#### 添加新的导出格式
+**文件**: `components/mcp/ExportReport.tsx`
+
+```typescript
+const exportToCSV = () => {
+  // 添加CSV导出逻辑
+  const csvContent = convertToCSV(report);
+  const blob = new Blob([csvContent], { type: 'text/csv' });
+  // ... 下载逻辑
+};
+```
+
 ---
 
 ## 故障排除
@@ -713,6 +768,14 @@ git push origin restore-<date>
 - ✅ 响应式设计
 - ✅ 部署到Vercel
 - ✅ 绑定域名 jilo.ai
+
+### v1.1 (2025-10-24)
+- ✅ MCP组件功能增强
+- ✅ 智能行业识别系统
+- ✅ 数据可视化图表集成
+- ✅ 多格式报告导出功能
+- ✅ 报告历史记录管理
+- ✅ 实时数据更新功能
 
 ---
 

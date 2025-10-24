@@ -1,9 +1,10 @@
-﻿import HeroSection from '@/components/HeroSection'
+import HeroSection from '@/components/HeroSection'
 import CapabilityMatrix from '@/components/CapabilityMatrix'
 import ServicePackages from '@/components/ServicePackages'
 import CoreAdvantages from '@/components/CoreAdvantages'
 import CTASection from '@/components/CTASection'
 import Footer from '@/components/Footer'
+import IndustryResearchMCP from '@/components/mcp/IndustryResearchMCP'
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <CapabilityMatrix />
       <ServicePackages />
       <CoreAdvantages />
+      <IndustryResearchMCP />
       <CTASection />
       <Footer />
     </main>
