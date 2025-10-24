@@ -5,6 +5,7 @@ import IndustryCharts from './IndustryCharts'
 import ExportReport from './ExportReport'
 import ReportHistory from './ReportHistory'
 import RealTimeData from './RealTimeData'
+import { apiService } from '@/lib/api/apiService'
 
 interface ResearchReport {
   title: string;
@@ -124,21 +125,110 @@ export default function IndustryResearchMCP() {
     setReport(historyReport);
   };
 
-  // 增强的行业调研过程
-  const generateReport = () => {
+  // 增强的行业调研过程 - 使用真实API数据
+  const generateReport = async () => {
     if (!industry.trim()) return;
     
     setIsLoading(true);
     setShowSuggestions(false);
     
-    // 模拟API调用延迟
-    setTimeout(() => {
+    try {
+      console.log(`Generating report for industry: ${industry}`);
+      
+      // 获取真实的市场数据
+      const [industryData, news] = await Promise.all([
+        apiService.getIndustryData(industry),
+        apiService.getNews(industry, 5)
+      ]);
+      
       const identifiedIndustry = identifyIndustry(industry);
       let newReport: ResearchReport;
       
       if (identifiedIndustry) {
-        // 基于识别的行业生成详细报告
+        // 基于真实API数据和识别的行业生成详细报告
         newReport = {
+          title: `${identifiedIndustry.name}行业深度分析报告`,
+          industry: industry,
+          date: new Date().toISOString().split('T')[0],
+          marketSize: `全球市场规模约$${(industryData.marketCap / 1000000000).toFixed(1)}万亿美元`,
+          growthRate: `年增长率${industryData.changePercent.toFixed(1)}%`,
+          keyPlayers: identifiedIndustry.marketData.keyPlayers,
+          regulations: identifiedIndustry.regulations,
+          trends: identifiedIndustry.trends,
+          highlights: [
+            `${identifiedIndustry.name}行业正处于快速发展期`,
+            `市场规模约$${(industryData.marketCap / 1000000000).toFixed(1)}万亿美元，年增长率${industryData.changePercent.toFixed(1)}%`,
+            `主要趋势：${identifiedIndustry.trends.slice(0, 3).join('、')}`,
+            `平均股价${industryData.avgPrice.toFixed(2)}，交易量${industryData.volume.toFixed(0)}`
+          ],
+          opportunities: [
+            `${identifiedIndustry.name}市场需求持续增长`,
+            '技术创新带来新的商业机会',
+            '政策支持为行业发展提供动力',
+            '新兴市场开拓空间巨大',
+            `当前市场表现${industryData.changePercent > 0 ? '积极' : '谨慎'}，为投资提供参考`
+          ],
+          risks: [
+            '市场竞争加剧，利润空间压缩',
+            '技术更新换代速度快，投资风险增加',
+            '监管政策变化可能影响市场准入',
+            '原材料价格波动影响成本控制',
+            `市场波动性${Math.abs(industryData.changePercent) > 5 ? '较高' : '适中'}，需谨慎投资`
+          ],
+          recommendations: [
+            '加强技术创新投入，提升核心竞争力',
+            '建立多元化市场布局，降低单一市场风险',
+            '关注政策变化，确保合规经营',
+            '与产业链上下游建立战略合作关系',
+            `建议${industryData.changePercent > 0 ? '积极' : '谨慎'}布局，关注市场动态`
+          ]
+        };
+      } else {
+        // 通用行业报告 - 使用真实数据
+        newReport = {
+          title: `${industry}行业分析报告`,
+          industry: industry,
+          date: new Date().toISOString().split('T')[0],
+          marketSize: `市场规模约$${(industryData.marketCap / 1000000000).toFixed(1)}万亿美元`,
+          growthRate: `年增长率${industryData.changePercent.toFixed(1)}%`,
+          highlights: [
+            '全球供应链重构，区域化趋势明显',
+            '数字化转型成为行业共识',
+            '可持续发展要求提高',
+            `当前市场表现${industryData.changePercent > 0 ? '积极' : '谨慎'}`
+          ],
+          opportunities: [
+            '区域全面经济伙伴关系协定(RCEP)降低贸易壁垒',
+            '工业互联网应用创造新的商业模式',
+            '绿色制造认证可提升国际竞争力',
+            `市场交易活跃，交易量达${industryData.volume.toFixed(0)}`
+          ],
+          risks: [
+            '地缘政治因素影响市场准入',
+            '技术标准差异增加合规成本',
+            '人才短缺限制创新能力',
+            `市场波动性${Math.abs(industryData.changePercent) > 5 ? '较高' : '适中'}`
+          ],
+          recommendations: [
+            '建立多区域生产基地，降低贸易风险',
+            '投资数字化系统，提高运营效率',
+            '加强行业协会合作，共同应对合规挑战',
+            `建议${industryData.changePercent > 0 ? '积极' : '谨慎'}投资策略`
+          ]
+        };
+      }
+      
+      console.log('Report generated successfully:', newReport);
+      setReport(newReport);
+    } catch (error) {
+      console.error('Error generating report:', error);
+      
+      // 降级到模拟数据
+      const identifiedIndustry = identifyIndustry(industry);
+      let fallbackReport: ResearchReport;
+      
+      if (identifiedIndustry) {
+        fallbackReport = {
           title: `${identifiedIndustry.name}行业深度分析报告`,
           industry: industry,
           date: new Date().toISOString().split('T')[0],
@@ -172,8 +262,7 @@ export default function IndustryResearchMCP() {
           ]
         };
       } else {
-        // 通用行业报告
-        newReport = {
+        fallbackReport = {
           title: `${industry}行业分析报告`,
           industry: industry,
           date: new Date().toISOString().split('T')[0],
@@ -200,9 +289,10 @@ export default function IndustryResearchMCP() {
         };
       }
       
-      setReport(newReport);
+      setReport(fallbackReport);
+    } finally {
       setIsLoading(false);
-    }, 2000);
+    }
   };
   
   return (
