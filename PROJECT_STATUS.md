@@ -2,10 +2,12 @@
 
 ## 项目概述
 
-Jilo.ai 是一个基于 Next.js 16.0.0 开发的网站，集成了行业研究 MCP (Modular Cognitive Process) 组件，提供行业智能分析功能。项目已成功部署到 Vercel 平台，可通过以下链接访问：
+Jilo.ai 是一个基于 Next.js 16.0.0 开发的AI驱动B2B营销自动化平台，集成了增强版行业研究 MCP (Modular Cognitive Process) 组件，提供基于真实市场数据的行业智能分析功能。项目已成功部署到 Vercel 平台，可通过以下链接访问：
 
-- **生产环境URL**: [https://jilo-ai-website-j7n1m8ba2-sdfsafs-projects.vercel.app](https://jilo-ai-website-j7n1m8ba2-sdfsafs-projects.vercel.app)
-- **部署检查链接**: [https://vercel.com/sdfsafs-projects/jilo-ai-website/2ZVxMnkAQkKFEoJXZinV5o45Hh4h](https://vercel.com/sdfsafs-projects/jilo-ai-website/2ZVxMnkAQkKFEoJXZinV5o45Hh4h)
+- **生产环境URL**: [https://jilo.ai](https://jilo.ai)
+- **备用域名**: [https://www.jilo.ai](https://www.jilo.ai)
+- **Vercel域名**: [https://jilo-ai-website.vercel.app](https://jilo-ai-website.vercel.app)
+- **GitHub仓库**: [https://github.com/372768498/jilo-ai-website](https://github.com/372768498/jilo-ai-website)
 
 ## 功能特性
 
@@ -17,12 +19,27 @@ Jilo.ai 是一个基于 Next.js 16.0.0 开发的网站，集成了行业研究 M
 - 行动号召区域
 - 导航栏（包含控制台入口）
 
-### 2. 行业研究 MCP 组件
+### 2. 增强版行业研究 MCP 组件
 
-- 基于用户输入进行行业智能分析
-- 提供行业亮点、市场机会、潜在风险和战略建议
-- 反馈循环机制
-- 基于全球贸易数据和法规的数据驱动决策
+#### 核心功能
+- **智能行业识别** - 基于关键词自动识别行业类型
+- **真实API数据集成** - 集成Alpha Vantage、NewsAPI等真实市场数据源
+- **数据可视化** - 集成recharts图表库展示市场趋势和竞争分析
+- **多格式报告导出** - 支持PDF、Excel、文本格式导出
+- **报告历史记录** - 本地存储用户查询历史和报告
+- **实时数据更新** - 每5分钟自动刷新市场数据和新闻
+
+#### 智能特性
+- **智能缓存机制** - 5分钟行业数据缓存，1分钟股票数据缓存
+- **降级机制** - API不可用时自动使用预设数据
+- **错误处理** - 用户友好的错误提示和状态指示
+- **性能优化** - 并行数据获取，请求去重
+
+#### 支持行业
+- 医疗设备（电动轮椅、制氧机等）
+- 水晶工艺品（奖杯、纪念品、艺术摆件）
+- 新能源（电动车、电池、充电桩）
+- 人工智能（AI技术、大模型、应用场景）
 
 ### 3. 控制台功能
 
@@ -63,12 +80,53 @@ Jilo.ai 是一个基于 Next.js 16.0.0 开发的网站，集成了行业研究 M
   - 用户名: `admin`, 密码: `admin123` - 查看优逸行报告
   - 用户名: `user1`, 密码: `user123` - 查看轩映水晶报告
 
+## API集成状态
+
+### 已集成的API服务
+
+| API服务 | 用途 | 状态 | 免费限制 | 配置状态 |
+|---------|------|------|----------|----------|
+| **Alpha Vantage** | 股票报价、金融市场数据 | ✅ 已集成 | 5 calls/min, 500 calls/day | 🔄 待配置密钥 |
+| **NewsAPI** | 行业新闻、实时资讯 | ✅ 已集成 | 1000 requests/month | 🔄 待配置密钥 |
+| **Polygon.io** | 市场数据、交易信息 | ✅ 已集成 | 5 calls/min | 🔄 待配置密钥 |
+| **Finnhub** | 金融数据、市场概览 | ✅ 已集成 | 60 calls/min | 🔄 待配置密钥 |
+
+### 当前数据源
+- **主要数据**: 智能降级机制，API不可用时使用预设行业数据
+- **实时新闻**: 预设行业新闻模板
+- **市场数据**: 基于行业类型的模拟数据
+- **缓存机制**: 5分钟行业数据缓存，1分钟股票数据缓存
+
+### API配置说明
+要启用真实API数据，需要：
+1. 注册各API服务获取密钥
+2. 在Vercel环境变量中配置密钥
+3. 重启应用以生效
+
+详细配置说明请参考：`API_INTEGRATION.md`
+
 ## 技术栈
 
+### 前端技术
 - **前端框架**: Next.js 16.0.0
+- **UI库**: React 19
+- **类型系统**: TypeScript
 - **构建工具**: Turbopack
-- **样式**: Tailwind CSS
+- **样式方案**: Tailwind CSS 4
+- **图表库**: Recharts
+
+### API集成
+- **Alpha Vantage**: 股票报价、金融市场数据
+- **NewsAPI**: 行业新闻、实时资讯
+- **Polygon.io**: 市场数据、交易信息
+- **Finnhub**: 金融数据、市场概览
+
+### 部署与基础设施
 - **部署平台**: Vercel
+- **域名管理**: NameSilo (jilo.ai)
+- **版本控制**: Git + GitHub
+- **CDN**: Vercel全球CDN
+- **HTTPS**: 自动SSL证书
 
 ## 开发与部署
 
@@ -97,17 +155,67 @@ vercel --prod
 主要目录和文件:
 
 - `/app` - Next.js 应用页面
+  - `layout.tsx` - 页面布局和SEO配置
+  - `page.tsx` - 主页面组件
+  - `dashboard/` - 控制台页面
 - `/components` - 可复用组件
+  - `mcp/` - MCP组件目录
+    - `IndustryResearchMCP.tsx` - 主MCP组件
+    - `IndustryCharts.tsx` - 数据可视化图表
+    - `ExportReport.tsx` - 报告导出功能
+    - `ReportHistory.tsx` - 历史记录管理
+    - `RealTimeData.tsx` - 实时数据更新
+- `/lib/api/` - API集成层
+  - `marketData.ts` - 市场数据API封装
+  - `apiService.ts` - API服务层和缓存管理
 - `/data` - 市场研究报告数据
 - `/public` - 静态资源
 
+## 版本历史
+
+### v1.0 (2025-10-24)
+- ✅ 初始版本上线
+- ✅ 完整的5屏落地页设计
+- ✅ 响应式设计
+- ✅ 部署到Vercel
+- ✅ 绑定域名 jilo.ai
+
+### v1.1 (2025-10-24)
+- ✅ MCP组件功能增强
+- ✅ 智能行业识别系统
+- ✅ 数据可视化图表集成
+- ✅ 多格式报告导出功能
+- ✅ 报告历史记录管理
+- ✅ 实时数据更新功能
+
+### v1.2 (2025-10-24)
+- ✅ 真实API数据集成
+- ✅ Alpha Vantage股票数据API
+- ✅ NewsAPI新闻数据集成
+- ✅ 智能缓存和降级机制
+- ✅ 错误处理和性能优化
+- ✅ API密钥管理和环境变量配置
+
 ## 未来计划
 
-- 增加更多行业报告
-- 优化用户界面和体验
-- 增强MCP组件功能
-- 添加数据可视化功能
+### 短期目标
+- 🔄 配置真实API密钥，启用完整数据源
+- 🔄 优化PDF导出功能，修复CSS颜色函数问题
+- 🔄 添加更多行业类型和关键词识别
+- 🔄 实现用户系统和个人化功能
+
+### 中期目标
+- 📊 集成更多数据源API（如Bloomberg、Reuters）
+- 🤖 添加AI对话功能，支持深度行业分析
+- 🌍 多语言支持（英文报告生成）
+- 📱 移动端优化和PWA支持
+
+### 长期目标
+- 🏢 企业级功能（多租户、权限管理）
+- 🔗 第三方系统集成（CRM、ERP）
+- 📈 高级分析功能（预测模型、风险评估）
+- 🎯 个性化推荐和智能营销建议
 
 ---
 
-*最后更新: 2023年11月20日*
+*最后更新: 2025年10月24日*
