@@ -181,3 +181,4 @@ if (require.main === module) {
 
 module.exports = { SimpleWorkflowConfigurator, main }
 
+

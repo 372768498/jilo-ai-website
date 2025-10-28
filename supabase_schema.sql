@@ -169,3 +169,4 @@ CREATE POLICY "Users can update their own competitor data" ON competitor_intelli
 -- 这些订阅可以在应用代码中监听
 -- 例如：监听市场信号变化、API使用情况等
 
+

@@ -62,3 +62,4 @@ INSERT INTO users (username, email, password_hash, full_name, role, department) 
 ('marketing_manager', 'marketing@jilo-ai.com', '$2a$10$example_hash', '营销经理', 'marketing_manager', '营销部')
 ON CONFLICT (email) DO NOTHING;
 
+

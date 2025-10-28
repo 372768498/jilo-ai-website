@@ -104,3 +104,4 @@ Write-Host "下一步:" -ForegroundColor Cyan
 Write-Host "• 运行测试: npm run test-supabase" -ForegroundColor White
 Write-Host "• 查看文档: DEPLOYMENT_INSTRUCTIONS.md" -ForegroundColor White
 
+
