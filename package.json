@@ -57,21 +57,23 @@
   "license": "MIT",
   "dependencies": {
     "@supabase/supabase-js": "^2.76.1",
+    "@tanstack/react-query": "^5.90.5",
     "airtable": "^0.12.2",
     "axios": "^1.6.0",
     "cors": "^2.8.5",
     "cron": "^3.1.6",
     "dotenv": "^16.6.1",
     "express": "^4.21.2",
-    "node-cron": "^3.0.3",
-    "winston": "^3.11.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "next": "^14.2.0",
+    "node-cron": "^3.0.3",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "recharts": "^2.12.0",
-    "jspdf": "^2.5.1",
-    "html2canvas": "^1.4.1",
-    "xlsx": "^0.18.5"
+    "winston": "^3.11.0",
+    "xlsx": "^0.18.5",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@types/node": "^20.14.0",
