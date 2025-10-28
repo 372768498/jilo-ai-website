@@ -22,10 +22,6 @@
       "permanent": false
     }
   ],
-  "domains": [
-    "yoyicare.jilo.ai",
-    "shiningcrystal.jilo.ai"
-  ],
   "headers": [
     {
       "source": "/microsite/(.*)",
@@ -42,4 +38,3 @@
     }
   ]
 }
-
