@@ -12,6 +12,10 @@ module.exports = {
         foreground: 'var(--foreground)',
       },
     },
+    container: {
+      center: true,
+      padding: '1rem',
+    },
   },
   plugins: [],
 }
