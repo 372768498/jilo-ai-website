@@ -163,7 +163,7 @@ export const translations = {
     marketSize: 'Market Size',
     growthRate: 'Growth Rate',
     keyPlayers: 'Key Players',
-抽样    industryTrends: '🚀 Industry Trends',
+    industryTrends: '🚀 Industry Trends',
     regulations: '📋 Key Regulations',
     risks: 'Potential Risks',
     recommendations: 'Strategic Recommendations',
