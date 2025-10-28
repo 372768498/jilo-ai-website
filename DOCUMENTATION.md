@@ -83,23 +83,32 @@
 jilo-ai-website/
 ├── .next/                    # Next.js构建输出（自动生成，不要修改）
 ├── app/                      # 应用核心目录
+│   ├── dashboard/           # 控制台页面
+│   │   └── page.tsx         # 控制台主页面
 │   ├── globals.css          # 全局样式
 │   ├── layout.tsx           # 页面布局和SEO配置
 │   └── page.tsx             # 主页面（组合所有组件）
 ├── components/              # 网站组件
 │   ├── HeroSection.tsx      # 首屏（Hero区域）
 │   ├── CapabilityMatrix.tsx # 核心能力矩阵
-│   ├── ServicePackages.tsx  # 服务方案
 │   ├── CoreAdvantages.tsx   # 核心优势
 │   ├── CTASection.tsx       # 行动号召区域
 │   ├── WeChatQRModal.tsx    # 微信二维码弹窗
 │   ├── Footer.tsx           # 页脚
+│   ├── Navbar.tsx           # 导航栏
 │   └── mcp/                 # MCP组件目录
 │       ├── IndustryResearchMCP.tsx  # 主MCP组件
 │       ├── IndustryCharts.tsx       # 数据可视化图表
 │       ├── ExportReport.tsx         # 报告导出功能
 │       ├── ReportHistory.tsx        # 历史记录管理
 │       └── RealTimeData.tsx         # 实时数据更新
+├── lib/                     # 工具库和API集成
+│   └── api/                 # API集成层
+│       ├── marketData.ts    # 市场数据API封装
+│       └── apiService.ts    # API服务层和缓存管理
+├── data/                    # 数据文件
+│   ├── shiningcrystal-report.json  # 水晶行业报告数据
+│   └── yoyicare-report.json        # 电动轮椅行业报告数据
 ├── public/                  # 静态资源（图片、字体等）
 ├── node_modules/            # 依赖包（自动生成）
 ├── .git/                    # Git版本控制（隐藏文件夹）
@@ -110,7 +119,11 @@ jilo-ai-website/
 ├── tailwind.config.ts      # Tailwind CSS配置
 ├── postcss.config.mjs      # PostCSS配置
 ├── next.config.ts          # Next.js配置
-└── README.md               # 项目说明
+├── deploy.js               # 部署脚本
+├── README.md               # 项目说明
+├── DOCUMENTATION.md        # 完整文档
+├── PROJECT_STATUS.md       # 项目状态文档
+└── API_INTEGRATION.md      # API集成说明文档
 ```
 
 ---
@@ -236,6 +249,66 @@ Development Command: npm run dev
 1. 登录 https://www.namesilo.com
 2. 点击域名 jilo.ai
 3. 选择 DNS 管理
+
+---
+
+## API集成
+
+### 集成概述
+
+Jilo.ai网站集成了多个真实市场数据API，为MCP组件提供实时行业分析数据。
+
+### 已集成的API服务
+
+| API服务 | 用途 | 状态 | 免费限制 | 配置状态 |
+|---------|------|------|----------|----------|
+| **Alpha Vantage** | 股票报价、金融市场数据 | ✅ 已集成 | 5 calls/min, 500 calls/day | 🔄 待配置密钥 |
+| **NewsAPI** | 行业新闻、实时资讯 | ✅ 已集成 | 1000 requests/month | 🔄 待配置密钥 |
+| **Polygon.io** | 市场数据、交易信息 | ✅ 已集成 | 5 calls/min | 🔄 待配置密钥 |
+| **Finnhub** | 金融数据、市场概览 | ✅ 已集成 | 60 calls/min | 🔄 待配置密钥 |
+
+### API配置说明
+
+要启用真实API数据，需要：
+
+1. **注册API服务**：
+   - Alpha Vantage: https://www.alphavantage.co/support/#api-key
+   - NewsAPI: https://newsapi.org/register
+   - Polygon.io: https://polygon.io/pricing
+   - Finnhub: https://finnhub.io/register
+
+2. **配置环境变量**：
+   在Vercel控制台添加以下环境变量：
+   ```
+   ALPHA_VANTAGE_API_KEY=your_key_here
+   NEWS_API_KEY=your_key_here
+   POLYGON_API_KEY=your_key_here
+   FINNHUB_API_KEY=your_key_here
+   ```
+
+3. **重启应用**：
+   配置完成后，Vercel会自动重新部署应用。
+
+### 智能缓存机制
+
+- **行业数据缓存**: 5分钟
+- **股票数据缓存**: 1分钟
+- **新闻数据缓存**: 5分钟
+- **降级机制**: API失败时自动使用预设数据
+
+### API服务层架构
+
+```
+lib/api/
+├── marketData.ts    # 各API的原始调用封装
+└── apiService.ts    # 统一服务层，包含缓存和降级逻辑
+```
+
+### 当前数据源
+
+- **主要数据源**: 真实API（需配置密钥）
+- **备用数据源**: 预设行业数据库
+- **降级策略**: API失败时自动切换到备用数据
 
 ---
 
@@ -455,30 +528,106 @@ import Image from 'next/image'
 </a>
 ```
 
-### 场景6: 添加新的服务包
+### 场景6: 服务方案组件管理
 
-**文件**: `components/ServicePackages.tsx`
+> **注意**: ServicePackages组件已在v1.2版本中删除，如需重新添加服务方案，请参考以下步骤：
 
-在 `packages` 数组中添加新对象:
+#### 重新添加服务方案组件
 
+1. **创建ServicePackages.tsx文件**:
 ```typescript
-const packages = [
-  // 现有的包...
-  {
-    name: '企业定制版',
-    price: '¥19,999',
-    period: '/月',
-    description: '适合大型企业，完全定制化解决方案',
-    features: [
-      '专属AI模型训练',
-      '独立私有化部署',
-      '7x24专属技术支持',
-      // 添加更多特性...
-    ],
-    highlight: false,
-    badge: '旗舰版'
-  }
-]
+'use client'
+
+export default function ServicePackages() {
+  const packages = [
+    {
+      name: '内容版',
+      price: '¥2,999',
+      period: '/月',
+      description: '适合初创企业，建立基础线上存在',
+      features: [
+        '每周5篇行业内容',
+        'LinkedIn自动发布',
+        '基础数据分析报告',
+        '邮件支持',
+        '内容合规审核'
+      ],
+      highlight: false,
+      badge: null
+    },
+    {
+      name: '增长版',
+      price: '¥5,999',
+      period: '/月',
+      description: '适合快速增长期企业，全面市场覆盖',
+      features: [
+        '每周10篇多平台内容',
+        'LinkedIn + Reddit运营',
+        '潜在客户追踪系统',
+        '月度策略报告',
+        '专属客户经理',
+        '竞品监测分析',
+        'A/B测试优化'
+      ],
+      highlight: true,
+      badge: '最受欢迎'
+    },
+    {
+      name: '全渠道版',
+      price: '¥9,999',
+      period: '/月',
+      description: '适合成熟企业，打造行业影响力',
+      features: [
+        '无限内容生产',
+        '全平台自动化运营',
+        'AI外联开发客户',
+        '实时市场洞察看板',
+        '定制化AI模型训练',
+        '7x24技术支持',
+        '季度战略规划会议',
+        '独立品牌建设方案'
+      ],
+      highlight: false,
+      badge: '企业首选'
+    }
+  ]
+
+  return (
+    <section className="py-20 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            选择适合你的服务方案
+          </h2>
+          <p className="text-xl text-gray-600">
+            灵活的服务包，随企业成长而升级
+          </p>
+        </div>
+        {/* 组件内容... */}
+      </div>
+    </section>
+  )
+}
+```
+
+2. **在主页面中引入**:
+```typescript
+// app/page.tsx
+import ServicePackages from '@/components/ServicePackages'
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-white">
+      <HeroSection />
+      <CapabilityMatrix />
+      <ServicePackages />  {/* 添加这行 */}
+      <CoreAdvantages />
+      <IndustryResearchMCP />
+      <CTASection />
+      <Footer />
+    </main>
+  )
+}
 ```
 
 ### 场景7: 修改SEO信息
@@ -557,7 +706,61 @@ export default function RootLayout({
 </div>
 ```
 
-### 场景10: 自定义MCP组件
+### 场景10: 修复导航链接
+
+#### 添加页面锚点ID
+为各个组件添加ID以便导航跳转：
+
+**文件**: `components/CapabilityMatrix.tsx`
+```typescript
+// 添加ID锚点
+<section id="features" className="py-20 bg-gray-50">
+```
+
+**文件**: `components/CoreAdvantages.tsx`
+```typescript
+// 添加ID锚点
+<section id="advantages" className="py-20 bg-gradient-to-b from-gray-50 to-white">
+```
+
+**文件**: `components/mcp/IndustryResearchMCP.tsx`
+```typescript
+// 添加ID锚点
+<section id="services" className="py-16 bg-gray-50">
+```
+
+#### 修复底部链接
+**文件**: `components/Footer.tsx`
+
+```typescript
+// 将底部链接指向正确的内容
+<li><a href="#features" className="hover:text-white transition-colors">功能特性</a></li>
+<li><a href="#services" className="hover:text-white transition-colors">服务方案</a></li>
+<li><a href="#advantages" className="hover:text-white transition-colors">案例展示</a></li>
+<li><a href="/dashboard" className="hover:text-white transition-colors">价格说明</a></li>
+```
+
+### 场景11: 自定义MCP组件
+
+#### MCP组件架构
+MCP (Modular Cognitive Process) 组件是Jilo.ai的核心功能，提供智能行业分析：
+
+```
+components/mcp/
+├── IndustryResearchMCP.tsx  # 主组件，包含行业识别和报告生成
+├── IndustryCharts.tsx        # 数据可视化图表（使用recharts）
+├── ExportReport.tsx          # 多格式报告导出（PDF/Excel/Text）
+├── ReportHistory.tsx         # 历史记录管理（localStorage）
+└── RealTimeData.tsx          # 实时数据更新（API集成）
+```
+
+#### 核心功能特性
+- **智能行业识别**: 基于关键词自动识别行业类型
+- **真实API数据**: 集成Alpha Vantage、NewsAPI等市场数据
+- **数据可视化**: 使用recharts展示市场趋势和竞争分析
+- **多格式导出**: 支持PDF、Excel、文本格式
+- **历史记录**: 本地存储用户查询历史和报告
+- **实时更新**: 每5分钟自动刷新市场数据
 
 #### 添加新的行业类型
 **文件**: `components/mcp/IndustryResearchMCP.tsx`
@@ -585,13 +788,18 @@ const industryDatabase: IndustryData[] = [
 **文件**: `components/mcp/IndustryCharts.tsx`
 
 ```typescript
-// 修改图表颜色
+// 修改图表颜色主题
 const COLORS = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7'];
 
 // 修改图表类型
 <BarChart data={data}>
   <Bar dataKey="value" fill="#FF6B6B" />
 </BarChart>
+
+// 添加新的图表类型
+<LineChart data={trendData}>
+  <Line type="monotone" dataKey="value" stroke="#8884d8" />
+</LineChart>
 ```
 
 #### 添加新的导出格式
@@ -602,7 +810,66 @@ const exportToCSV = () => {
   // 添加CSV导出逻辑
   const csvContent = convertToCSV(report);
   const blob = new Blob([csvContent], { type: 'text/csv' });
-  // ... 下载逻辑
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${report.title}.csv`;
+  link.click();
+  URL.revokeObjectURL(url);
+};
+
+// 添加Word文档导出
+const exportToWord = async () => {
+  const doc = new Document();
+  // 添加Word导出逻辑...
+};
+```
+
+#### 自定义API数据源
+**文件**: `lib/api/apiService.ts`
+
+```typescript
+// 添加新的API服务
+const fetchCustomData = async (industry: string) => {
+  try {
+    const response = await fetch(`https://api.example.com/data/${industry}`);
+    return await response.json();
+  } catch (error) {
+    console.error('Custom API error:', error);
+    return null;
+  }
+};
+
+// 集成到主服务
+export const getIndustryData = async (industry: string) => {
+  const [alphaData, customData] = await Promise.all([
+    fetchAlphaVantageData(industry),
+    fetchCustomData(industry)
+  ]);
+  
+  return {
+    ...alphaData,
+    customMetrics: customData
+  };
+};
+```
+
+#### 修改缓存策略
+**文件**: `lib/api/apiService.ts`
+
+```typescript
+// 自定义缓存时间
+const CACHE_DURATION = {
+  INDUSTRY_DATA: 10 * 60 * 1000,  // 10分钟
+  STOCK_DATA: 2 * 60 * 1000,      // 2分钟
+  NEWS_DATA: 15 * 60 * 1000,     // 15分钟
+};
+
+// 添加缓存清理功能
+const clearCache = () => {
+  localStorage.removeItem('industryCache');
+  localStorage.removeItem('stockCache');
+  localStorage.removeItem('newsCache');
 };
 ```
 
@@ -695,6 +962,88 @@ npx tsc --noEmit
 npm install --save-dev @types/react @types/node
 ```
 
+### 问题7: API数据获取失败
+
+**现象**: MCP组件显示"获取实时数据失败，使用缓存数据"
+
+**可能原因**:
+- API密钥未配置
+- API调用超限
+- 网络连接问题
+
+**解决方案**:
+1. **检查API密钥配置**:
+   ```bash
+   # 在Vercel控制台检查环境变量
+   # 确保以下变量已设置:
+   # ALPHA_VANTAGE_API_KEY
+   # NEWS_API_KEY
+   # POLYGON_API_KEY
+   # FINNHUB_API_KEY
+   ```
+
+2. **检查API调用限制**:
+   - Alpha Vantage: 5 calls/min, 500 calls/day
+   - NewsAPI: 1000 requests/month
+   - Polygon.io: 5 calls/min
+   - Finnhub: 60 calls/min
+
+3. **测试API连接**:
+   ```bash
+   # 本地测试API调用
+   npm run dev
+   # 在浏览器控制台查看API错误信息
+   ```
+
+### 问题8: 导航链接不工作
+
+**现象**: 点击导航栏或底部链接无法跳转
+
+**解决方案**:
+1. **检查组件ID**:
+   ```typescript
+   // 确保各组件有正确的ID
+   <section id="features" className="...">  // CapabilityMatrix
+   <section id="services" className="...">  // IndustryResearchMCP
+   <section id="advantages" className="..."> // CoreAdvantages
+   ```
+
+2. **检查链接格式**:
+   ```typescript
+   // 导航栏链接
+   <Link href="#features">功能</Link>
+   <Link href="#services">服务</Link>
+   <Link href="#advantages">优势</Link>
+   ```
+
+3. **清除浏览器缓存**:
+   ```bash
+   # 强制刷新页面
+   Ctrl + F5 (Windows) 或 Cmd + Shift + R (Mac)
+   ```
+
+### 问题9: MCP组件报告生成失败
+
+**现象**: 点击"开始分析"后无反应或报错
+
+**解决方案**:
+1. **检查输入内容**:
+   - 确保输入框不为空
+   - 输入内容长度适中（1-50字符）
+
+2. **检查API服务**:
+   ```bash
+   # 查看浏览器控制台错误
+   # 检查网络请求是否成功
+   ```
+
+3. **重置组件状态**:
+   ```bash
+   # 刷新页面重新加载组件
+   # 或清除localStorage缓存
+   localStorage.clear()
+   ```
+
 ---
 
 ## 备份与恢复
@@ -751,12 +1100,27 @@ git push origin restore-<date>
 
 ### 技术支持
 - **GitHub Issues**: https://github.com/372768498/jilo-ai-website/issues
-- **邮箱**: 372768498@qq.com
+- **邮箱**: contact@jilo.ai
+- **项目文档**: https://github.com/372768498/jilo-ai-website/blob/main/DOCUMENTATION.md
+- **API集成文档**: https://github.com/372768498/jilo-ai-website/blob/main/API_INTEGRATION.md
 
 ### 相关账号
 - **GitHub**: 372768498
 - **Vercel**: 372768498's projects
-- **域名**: NameSilo
+- **域名**: NameSilo (jilo.ai)
+- **在线网站**: https://jilo.ai
+
+### 开发团队
+- **主要开发者**: Claude & thirteenxb
+- **项目创建日期**: 2025年10月24日
+- **最后更新**: 2025年10月24日
+- **当前版本**: v1.2
+
+### 获取帮助
+1. **查看文档**: 首先阅读本DOCUMENTATION.md文件
+2. **检查故障排除**: 查看"故障排除"章节
+3. **GitHub Issues**: 提交技术问题
+4. **邮件联系**: 发送邮件到contact@jilo.ai
 
 ---
 
@@ -776,6 +1140,17 @@ git push origin restore-<date>
 - ✅ 多格式报告导出功能
 - ✅ 报告历史记录管理
 - ✅ 实时数据更新功能
+
+### v1.2 (2025-10-24)
+- ✅ 真实API数据集成
+- ✅ Alpha Vantage股票数据API
+- ✅ NewsAPI新闻数据集成
+- ✅ 智能缓存和降级机制
+- ✅ 错误处理和性能优化
+- ✅ API密钥管理和环境变量配置
+- ✅ 导航链接修复和锚点跳转
+- ✅ 服务方案组件删除
+- ✅ 底部链接功能完善
 
 ---
 
@@ -803,6 +1178,7 @@ npm install              # 安装依赖
 npm run dev             # 开发模式
 npm run build           # 构建生产版本
 npm start               # 运行生产版本
+npm run lint            # 代码检查
 
 # Git操作
 git status              # 查看状态
@@ -810,10 +1186,27 @@ git add .               # 添加所有修改
 git commit -m "msg"     # 提交
 git push origin main    # 推送
 git pull origin main    # 拉取
+git log --oneline       # 查看提交历史
 
 # 常用导航
 cd D:\jilo-ai-website   # 进入项目
 code .                  # 用VS Code打开
+
+# API测试
+# 检查环境变量
+echo $ALPHA_VANTAGE_API_KEY
+echo $NEWS_API_KEY
+echo $POLYGON_API_KEY
+echo $FINNHUB_API_KEY
+
+# 清除缓存
+npm run build -- --no-cache  # 清除构建缓存
+localStorage.clear()          # 清除浏览器缓存（在控制台执行）
+
+# 故障排除
+npx tsc --noEmit       # 检查TypeScript错误
+npm audit              # 检查安全漏洞
+npm outdated           # 检查过时依赖
 ```
 
 ---
@@ -823,6 +1216,8 @@ code .                  # 用VS Code打开
 | 日期 | 修改内容 | 修改人 |
 |------|---------|--------|
 | 2025-10-24 | 创建文档 | Claude & thirteenxb |
+| 2025-10-24 | 更新到v1.1 - MCP组件增强 | Claude & thirteenxb |
+| 2025-10-24 | 更新到v1.2 - API集成和导航修复 | Claude & thirteenxb |
 | - | - | - |
 
 ---

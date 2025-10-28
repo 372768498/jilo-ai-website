@@ -1,30 +1,83 @@
 {
-  "name": "jilo-ai-website",
-  "version": "0.1.0",
-  "private": true,
+  "name": "ai-marketing-platform",
+  "version": "1.0.0",
+  "description": "AI驱动的出海营销中台",
+  "main": "scripts/start-system.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "node scripts/start-system.js",
+    "dev": "nodemon scripts/start-system.js",
+    "test": "node scripts/test-system.js",
+    "test:watch": "jest --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "setup": "node scripts/setup.js",
+    "health-check": "node scripts/health-check.js",
+    "create-test-client": "node scripts/create-test-client.js",
+    "cleanup": "node scripts/cleanup-test-data.js",
+    "configure-workflows": "node scripts/simple-workflow-config.js",
+    "workflow:configure": "node scripts/simple-workflow-config.js configure",
+    "workflow:help": "node scripts/simple-workflow-config.js help",
+    "demo": "node scripts/demo-effects.js",
+    "visual-demo": "node scripts/visual-demo.js",
+    "visual-server": "node scripts/visual-server.js",
+    "supplement-clients": "node scripts/supplement-client-data.js",
+    "build-icp": "node scripts/build-icp-personas.js",
+    "create-strategy": "node scripts/create-marketing-strategy.js",
+    "generate-daily-reports": "node scripts/generate-daily-reports.js",
+    "create-competitor-monitoring": "node scripts/create-competitor-monitoring.js",
+    "build-icp-system": "node scripts/build-icp-system.js",
+    "phase1-summary": "node scripts/create-phase1-summary.js",
+    "create-crm": "node scripts/create-crm-system.js",
+    "create-crm-db": "node scripts/create-crm-database-schema.js",
+    "create-crm-frontend": "node scripts/create-crm-frontend.js",
+    "create-crm-demo": "node scripts/create-crm-demo.js",
+    "create-crm-summary": "node scripts/create-crm-summary.js",
+    "test-supabase": "node scripts/test-supabase-connection.js",
+    "deploy-supabase": "node scripts/deploy-supabase-crm.js",
+    "setup-env": "echo '环境变量已配置在 .env.local'",
+    "deploy-db": "node scripts/deploy-via-api.js",
+    "simple-test": "node scripts/simple-test-supabase.js",
+    "api": "node api/server.js",
+    "api:dev": "nodemon api/server.js",
+    "mcp": "node scripts/start-mcp-servers.js",
+    "mcp:test": "node scripts/test-mcp.js"
   },
+  "keywords": [
+    "ai",
+    "marketing",
+    "automation",
+    "b2b",
+    "export",
+    "china"
+  ],
+  "author": "AI Marketing Platform Team",
+  "license": "MIT",
   "dependencies": {
-    "html2canvas": "^1.4.1",
-    "jspdf": "^3.0.3",
-    "next": "16.0.0",
-    "react": "19.2.0",
-    "react-dom": "19.2.0",
-    "recharts": "^3.3.0",
-    "xlsx": "^0.18.5"
+    "@supabase/supabase-js": "^2.76.1",
+    "airtable": "^0.12.2",
+    "axios": "^1.6.0",
+    "cors": "^2.8.5",
+    "cron": "^3.1.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "node-cron": "^3.0.3",
+    "winston": "^3.11.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.0.0",
-    "tailwindcss": "^4",
-    "typescript": "^5"
-  }
+    "eslint": "^8.54.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/ai-marketing-platform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/ai-marketing-platform/issues"
+  },
+  "homepage": "https://github.com/your-org/ai-marketing-platform#readme"
 }

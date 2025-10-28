@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "public": true,
+  "rewrites": [
+    {
+      "source": "/microsite/yoyicare",
+      "destination": "/microsite-yoyicare.html"
+    },
+    {
+      "source": "/microsite/shiningcrystal",
+      "destination": "/microsite-shiningcrystal.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/yoyicare",
+      "destination": "/microsite/yoyicare",
+      "permanent": false
+    },
+    {
+      "source": "/shiningcrystal",
+      "destination": "/microsite/shiningcrystal",
+      "permanent": false
+    }
+  ],
+  "domains": [
+    "yoyicare.jilo.ai",
+    "shiningcrystal.jilo.ai"
+  ],
+  "headers": [
+    {
+      "source": "/microsite/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
+    }
+  ]
+}
+

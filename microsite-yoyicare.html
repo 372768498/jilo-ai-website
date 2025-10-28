@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YoyiCare Medical | Professional Medical Devices Manufacturer | Electric Wheelchairs & Oxygen Concentrators</title>
+    <meta name="description" content="YoyiCare is a leading medical device manufacturer specializing in electric wheelchairs, oxygen concentrators, and nursing beds. ISO13485 certified, FDA & CE approved. OEM/ODM services available.">
+    <meta name="keywords" content="electric wheelchair, oxygen concentrator, medical device, nursing bed, FDA, CE, ISO13485">
+    
+    <!-- Performance Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    
+    <style>
+        /* Critical CSS - Inline for Performance */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #fff;
+            color: #667eea;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 10px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin-bottom: 50px;
+            color: #2d3748;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .product-card {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .product-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .product-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .product-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .product-card li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+        }
+        
+        .certifications {
+            background: #f7fafc;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+        
+        .cert-item {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .cert-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .advantages {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 80px 20px;
+        }
+        
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+        
+        .advantage-item {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .advantage-item h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 40px auto;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .submit-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links a {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 20px;
+            }
+            
+            .section {
+                padding: 40px 20px;
+            }
+            
+            .products-grid,
+            .cert-grid,
+            .advantages-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>YoyiCare Medical Technology</h1>
+            <p>Professional Medical Devices Manufacturer | 12+ Years Experience | ISO13485 Certified</p>
+            <p style="font-size: 1.2rem; margin-top: 20px;">Quality Medical Devices for Global Healthcare</p>
+            <div style="margin-top: 30px;">
+                <a href="#products" class="cta-button">View Products</a>
+                <a href="#contact" class="cta-button" style="background: rgba(255,255,255,0.2); color: white;">Get Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="section" id="products">
+        <h2 class="section-title">Our Medical Products</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <h3>🚶 Electric Wheelchairs</h3>
+                <p style="margin-bottom: 20px; color: #666;">Smart mobility solutions for enhanced independence</p>
+                <ul>
+                    <li>Intelligent Control System</li>
+                    <li>Customizable Options</li>
+                    <li>CE & FDA Certified</li>
+                    <li>Long-lasting Battery</li>
+                    <li>Compact & Foldable</li>
+                </ul>
+                <p style="margin-top: 20px; font-weight: 600; color: #667eea;">
+                    MOQ: 1 unit | Lead Time: 30-35 days
+                </p>
+            </div>
+            
+            <div class="product-card">
+                <h3>💨 Oxygen Concentrators</h3>
+                <p style="margin-bottom: 20px; color: #666;">High-quality oxygen therapy equipment</p>
+                <ul>
+                    <li>High-Altitude Models</li>
+                    <li>Quiet Operation</li>
+                    <li>Global Voltage Compatible</li>
+                    <li>Compact Design</li>
+                    <li>Easy to Maintain</li>
+                </ul>
+                <p style="margin-top: 20px; font-weight: 600; color: #667eea;">
+                    MOQ: 1 unit | Lead Time: 30-35 days
+                </p>
+            </div>
+            
+            <div class="product-card">
+                <h3>🛏️ Nursing Beds</h3>
+                <p style="margin-bottom: 20px; color: #666;">Comfortable and functional care beds</p>
+                <ul>
+                    <li>Manual & Electric Options</li>
+                    <li>Height Adjustable</li>
+                    <li>Tilt Function</li>
+                    <li>Voice Control Available</li>
+                    <li>Patient Safety Features</li>
+                </ul>
+                <p style="margin-top: 20px; font-weight: 600; color: #667eea;">
+                    MOQ: 1 unit | Lead Time: 30-35 days
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="certifications">
+        <h2 class="section-title">Certifications & Quality Assurance</h2>
+        <div class="cert-grid">
+            <div class="cert-item">
+                <h4>ISO 13485:2016</h4>
+                <p>Quality Management System</p>
+            </div>
+            <div class="cert-item">
+                <h4>CE Marking</h4>
+                <p>European Conformity</p>
+            </div>
+            <div class="cert-item">
+                <h4>FDA Approved</h4>
+                <p>US Food & Drug Administration</p>
+            </div>
+            <div class="cert-item">
+                <h4>Medical Device License</h4>
+                <p>China NMPA Certified</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Competitive Advantages -->
+    <section class="advantages">
+        <h2 class="section-title">Why Choose YoyiCare?</h2>
+        <div class="advantages-grid">
+            <div class="advantage-item">
+                <h3>12+</h3>
+                <p>Years of Industry Experience</p>
+            </div>
+            <div class="advantage-item">
+                <h3>60+</h3>
+                <p>Patents & Technologies</p>
+            </div>
+            <div class="advantage-item">
+                <h3>200+</h3>
+                <p>Professional Team Members</p>
+            </div>
+            <div class="advantage-item">
+                <h3>100%</h3>
+                <p>Quality Assurance</p>
+            </div>
+        </div>
+        <div style="max-width: 800px; margin: 40px auto; text-align: center;">
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 10px 0; font-size: 1.1rem;">✓ National High-Tech Enterprise Certification</li>
+                <li style="padding: 10px 0; font-size: 1.1rem;">✓ OEM/ODM Customization Service Available</li>
+                <li style="padding: 10px 0; font-size: 1.1rem;">✓ Global Shipping & Logistics Support</li>
+                <li style="padding: 10px 0; font-size: 1.1rem;">✓ Flexible Payment Terms (30% Deposit, 70% BL)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="section" id="contact">
+        <h2 class="section-title">Request a Quote</h2>
+        <div class="contact-form">
+            <form id="enquiryForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Your Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" name="company">
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product">Product of Interest</label>
+                    <select id="product" name="product" style="width: 100%; padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 8px;">
+                        <option value="">Select Windows:</option>
+                        <option value="electric-wheelchair">Electric Wheelchair</option>
+                        <option value="oxygen-concentrator">Oxygen Concentrator</option>
+                        <option value="nursing-bed">Nursing Bed</option>
+                        <option value="other">Other Products</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message / Requirements</label>
+                    <textarea id="message" name="message" rows="5"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-button">Send Inquiry via WhatsApp</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3 style="margin-bottom: 20px;">YoyiCare Medical Technology Co., Ltd.</h3>
+            <p style="margin-bottom: 20px; color: #a0aec0;">
+                No. 640 Jiulong North Road, Dongcheng Street, Yongkang City, Zhejiang Province, China
+            </p>
+            <div class="footer-links">
+                <a href="mailto:cheelin@yoyicare.com">cheelin@yoyicare.com</a>
+                <a href="tel:+8618905797831">+86 18905797831</a>
+                <a href="https://yoyicare.com/" target="_blank">Website</a>
+            </div>
+            <p style="margin-top: 30px; color: #718096; font-size: 0.9rem;">
+                © 2025 YoyiCare Medical Technology. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // WhatsApp Integration
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                company: document.getElementById('company').value,
+                phone: document.getElementById('phone').value,
+                product: document.getElementById('product').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Format message for WhatsApp
+            const whatsappMessage = `Hi YoyiCare Team,
+
+I'm interested in your medical devices:
+
+Name: ${formData.name}
+Email: ${formData.email}
+Company: ${formData.company}
+Phone: ${formData.phone}
+Product: ${formData.product}
+Message: ${formData.message}
+
+Please contact me for a quote.
+
+Best regards,
+${formData.name}`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // WhatsApp phone number (YoyiCare contact)
+            const whatsappNumber = '8618905797831'; // +86 18905797831
+            
+            // Open WhatsApp
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+            
+            return false;
+        }
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Lazy loading images (when added)
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('img.lazy').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+    </script>
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MedicalBusiness",
+        "name": "YoyiCare Medical Technology Co., Ltd.",
+        "description": "Professional medical device manufacturer specializing in electric wheelchairs, oxygen concentrators, and nursing beds",
+        "url": "https://yoyicare.com",
+        "telephone": "+8618905797831",
+        "email": "cheelin@yoyicare.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "No. 640 Jiulong North Road, Dongcheng Street",
+            "addressLocality": "Yongkang City",
+            "addressRegion": "Zhejiang Province",
+            "addressCountry": "CN"
+        },
+        "priceRange": "$$",
+        "paymentAccepted": "Bank Transfer, Letter of Credit",
+        "currenciesAccepted": "USD, EUR, CNY"
+    }
+    </script>
+</body>
+</html>
+

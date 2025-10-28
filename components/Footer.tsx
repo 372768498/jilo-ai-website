@@ -34,10 +34,10 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4">产品</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">功能特性</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">服务方案</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">案例展示</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">价格说明</a></li>
+              <li><a href="#features" className="hover:text-white transition-colors">功能特性</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">服务方案</a></li>
+              <li><a href="#advantages" className="hover:text-white transition-colors">案例展示</a></li>
+              <li><a href="/dashboard" className="hover:text-white transition-colors">价格说明</a></li>
             </ul>
           </div>
 
@@ -45,10 +45,10 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold mb-4">资源</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">帮助中心</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">API文档</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">博客</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">最佳实践</a></li>
+              <li><a href="#features" className="hover:text-white transition-colors">帮助中心</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">API文档</a></li>
+              <li><a href="#advantages" className="hover:text-white transition-colors">博客</a></li>
+              <li><a href="/dashboard" className="hover:text-white transition-colors">最佳实践</a></li>
             </ul>
           </div>
 
@@ -63,7 +63,7 @@ export default function Footer() {
               </li>
               <li>工作日 9:00-18:00</li>
               <li className="pt-2">
-                <a href="#" className="text-blue-400 hover:text-blue-300 transition-colors">
+                <a href="mailto:contact@jilo.ai" className="text-blue-400 hover:text-blue-300 transition-colors">
                   预约演示 →
                 </a>
               </li>
@@ -74,9 +74,9 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-sm">
           <p>© {currentYear} Jilo.ai. 保留所有权利。</p>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">隐私政策</a>
-            <a href="#" className="hover:text-white transition-colors">服务条款</a>
-            <a href="#" className="hover:text-white transition-colors">Cookie政策</a>
+            <a href="mailto:contact@jilo.ai" className="hover:text-white transition-colors">隐私政策</a>
+            <a href="mailto:contact@jilo.ai" className="hover:text-white transition-colors">服务条款</a>
+            <a href="mailto:contact@jilo.ai" className="hover:text-white transition-colors">Cookie政策</a>
           </div>
         </div>
       </div>

@@ -1,0 +1,116 @@
+{
+  "test_id": "SUPABASE_TEST_20251024",
+  "test_date": "2025-10-24",
+  "test_type": "Supabase CRM系统连接测试",
+  "environment_check": {
+    "supabase_url": "未设置",
+    "supabase_anon_key": "未设置",
+    "supabase_service_key": "未设置",
+    "database_url": "未设置"
+  },
+  "deployment_steps": [
+    {
+      "step": 1,
+      "name": "创建Supabase项目",
+      "status": "需要手动完成",
+      "description": "在Supabase控制台创建新项目",
+      "action": "访问 https://supabase.com/dashboard 创建项目"
+    },
+    {
+      "step": 2,
+      "name": "获取连接信息",
+      "status": "需要手动完成",
+      "description": "获取Project URL和API密钥",
+      "action": "在项目设置中复制URL和密钥"
+    },
+    {
+      "step": 3,
+      "name": "执行SQL脚本",
+      "status": "准备就绪",
+      "description": "执行CRM数据库架构脚本",
+      "action": "使用SQL编辑器执行 supabase-crm-deployment.sql"
+    },
+    {
+      "step": 4,
+      "name": "配置环境变量",
+      "status": "需要配置",
+      "description": "设置.env.local文件",
+      "action": "添加Supabase连接配置"
+    },
+    {
+      "step": 5,
+      "name": "测试连接",
+      "status": "等待执行",
+      "description": "验证数据库连接和功能",
+      "action": "运行连接测试脚本"
+    }
+  ],
+  "sql_script_info": {
+    "file_name": "supabase-crm-deployment.sql",
+    "file_path": "data/supabase-crm-deployment.sql",
+    "features": [
+      "7个核心表创建",
+      "20+个索引优化",
+      "6个触发器设置",
+      "2个自定义函数",
+      "2个业务视图",
+      "行级安全策略",
+      "6个用户角色",
+      "初始配置数据",
+      "示例客户数据",
+      "部署验证脚本"
+    ]
+  },
+  "expected_tables": [
+    "clients - 客户信息表",
+    "orders - 订单信息表",
+    "communications - 沟通记录表",
+    "campaigns - 营销活动表",
+    "users - 用户信息表",
+    "system_config - 系统配置表",
+    "audit_logs - 审计日志表"
+  ],
+  "expected_functions": [
+    "update_updated_at_column - 自动更新时间戳",
+    "get_client_summary - 客户汇总信息"
+  ],
+  "expected_views": [
+    "client_overview - 客户概览视图",
+    "sales_performance - 销售业绩视图"
+  ],
+  "verification_queries": {
+    "check_tables": "\n        SELECT table_name \n        FROM information_schema.tables \n        WHERE table_schema = 'public' \n        ORDER BY table_name;\n      ",
+    "check_indexes": "\n        SELECT indexname, tablename \n        FROM pg_indexes \n        WHERE schemaname = 'public' \n        ORDER BY tablename, indexname;\n      ",
+    "check_functions": "\n        SELECT routine_name, routine_type \n        FROM information_schema.routines \n        WHERE routine_schema = 'public';\n      ",
+    "check_views": "\n        SELECT table_name \n        FROM information_schema.views \n        WHERE table_schema = 'public';\n      ",
+    "check_sample_data": "\n        SELECT company_name, industry, relationship_status \n        FROM clients;\n      "
+  },
+  "next_actions": [
+    "1. 在Supabase控制台创建新项目",
+    "2. 复制项目URL和API密钥",
+    "3. 在SQL编辑器中执行 supabase-crm-deployment.sql",
+    "4. 配置.env.local环境变量",
+    "5. 运行 npm run test-system 验证连接",
+    "6. 检查数据库表和数据是否正确创建"
+  ],
+  "troubleshooting": {
+    "common_issues": [
+      {
+        "issue": "UUID扩展未启用",
+        "solution": "执行 CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";"
+      },
+      {
+        "issue": "权限不足",
+        "solution": "确保使用service_role key，检查RLS策略"
+      },
+      {
+        "issue": "表已存在",
+        "solution": "脚本使用 IF NOT EXISTS，不会重复创建"
+      },
+      {
+        "issue": "连接超时",
+        "solution": "检查网络连接，验证连接字符串"
+      }
+    ]
+  }
+}
