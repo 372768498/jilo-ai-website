@@ -137,3 +137,4 @@ SELECT trigger_name, event_object_table FROM information_schema.triggers;
 
 **祝您部署顺利！** 🚀
 
+
